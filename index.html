@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Happy Valentine's Mai ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffdde1;  /* Light pink background */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ios-screen {
+            width: 390px;
+            height: 844px;
+            background: linear-gradient(150deg, #ffe6eb 0%, #ffb6c1 100%);  /* Softer pink gradient */
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);  /* Light pink shadow */
+        }
+
+        .content {
+            padding: 100px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        /* Add these new styles for images */
+        .mai-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            border: 3px solid white;
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        #photo1 {
+            top: 120px;
+            left: 30px;
+            transform: rotate(-5deg);
+        }
+
+        #photo2 {
+            top: 120px;
+            right: 30px;
+            transform: rotate(-85deg);
+        }
+
+        .sticker {
+            width: 80px;
+            position: absolute;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ios-screen">
+        <!-- ... existing status bar and dynamic island ... -->
+        
+        <div class="content">
+            <!-- Updated image files with correct extensions -->
+            <img src="IMG_0188.JPG" class="mai-photo" id="photo1">
+            <img src="IMG_1300.JPG" class="mai-photo" id="photo2">
+            <img src="IMG_1562.JPG" class="mai-photo" style="top: 300px; left: 20px;">
+            <img src="IMG_E1631.JPG" class="mai-photo" style="top: 400px; right: 20px;">
+
+            <div class="heart-emoji">❤️</div>
+            <h1 class="message">Happy Valentine's, Mai!</h1>
+            <button class="heart-button" onclick="revealMessage()">💌 Open Your Love Letter</button>
+        </div>
+
+        <!-- ... rest of existing code ... -->
+    </div>
+
+    <script>
+        function revealMessage() {
+            // Modified message for Mai
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.innerHTML = 'Mai, you make every day special! 🌹❤️';
+            message.style.animation = 'fadeIn 1s';
+            document.querySelector('.content').appendChild(message);
+            
+            // Add more hearts for Mai
+            for(let i = 0; i < 100; i++) {
+                createHeart();
+            }
+        }
+        /* ... rest of existing script ... */
+    </script>
+</body>
+</html>
