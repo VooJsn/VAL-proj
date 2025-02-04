@@ -12,16 +12,15 @@
             padding: 0;
             background: #ffdde1;  /* Light pink background */
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .ios-screen {
-            width: 390px;  /* iPhone 14 width */
-            height: 844px; /* iPhone 14 height */
-            background: #ECD3FF;  /* New background color */
+            width: 390px;
+            height: 844px;
+            background: #ECD3FF;
             position: relative;
             overflow: hidden;
             margin: 0 auto;
@@ -32,8 +31,10 @@
             text-align: center;
             color: white;
             position: relative;
-            height: 100%;
+            min-height: 100%;
+            padding-bottom: 220px;  /* Space for tulips */
             z-index: 2;
+            overflow-y: auto;
         }
 
         .message {
@@ -221,15 +222,32 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 390px;
-            height: 200px;  /* Increased height */
+            width: 100%;
+            height: 200px;
             background-image: url('pngegg.png');
             background-size: contain;
             background-position: bottom center;
             background-repeat: no-repeat;
-            opacity: 0.7;  /* Increased opacity to make it darker */
+            opacity: 0.5;
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* Ensure status bar doesn't interfere with scrolling */
+        .status-bar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(236, 211, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Ensure proper viewport height on mobile */
+        @supports (-webkit-touch-callout: none) {
+            .ios-screen {
+                min-height: -webkit-fill-available;
+            }
         }
     </style>
     
