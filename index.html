@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Happy Valentine's Mai ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -33,26 +34,43 @@
             position: relative;
         }
 
-        /* Add these new styles for images */
+        /* Create a grid container for photos */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 150px);  /* 2 columns */
+            grid-gap: 20px;  /* Space between photos */
+            justify-content: center;
+            margin-top: 100px;  /* Changed from 300px to 100px to move up */
+            position: relative;
+        }
+
         .mai-photo { 
             width: 150px;
             height: 150px;
             border-radius: 20px;
             border: 3px solid white;
-            position: absolute;
-            animation: float 3s ease-in-out infinite;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;  /* Changed from absolute */
+            transform: rotate(0deg);  /* No rotation */
         }
 
-        #photo1 {
-            top: 320px;
-            left: 30px;
-            transform: rotate(-5deg);
+        /* Remove all individual positioning */
+        #photo1, #photo2, 
+        .content img:nth-child(3), 
+        .content img:nth-child(4) {
+            top: auto;
+            left: auto;
+            right: auto;
         }
 
-        #photo2 {
-            top: 320px;
-            right: 30px;
-            transform: rotate(-85deg);
+        .heart-emoji {
+            margin-top: 20px;
+            font-size: 40px;
+        }
+
+        .heart-button {
+            margin-bottom: 20px;  /* Keep some space between button and photos */
         }
 
         .sticker {
@@ -66,24 +84,83 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Update the other two photos to be side by side */
-        .content img:nth-child(3) {
-            top: 600px;  /* Moved further down */
-            left: 30px;  /* Aligned with first photo */
+        /* Style for the popup letter */
+        .letter-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;          /* Reduced from 80% */
+            max-width: 300px;    /* Reduced from 350px */
+            background: #f9e7c3;
+            border: 6px solid #8b5e3c;  /* Slightly thinner border */
+            border-radius: 10px;
+            padding: 15px;       /* Reduced padding */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            color: #4a3525;
         }
 
-        .content img:nth-child(4) {
-            top: 600px;  /* Same level as third photo */
-            right: 30px;  /* Aligned with second photo */
+        .letter-content {
+            margin: 12px 0;
+            line-height: 1.4;
+            font-size: 14px;     /* Smaller font size */
         }
 
-        /* Add some margin to the top content */
-        .heart-emoji {
-            margin-top: -50px;
+        .letter-signature {
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 14px;     /* Smaller font size */
         }
 
-        .message {
-            margin-bottom: 30px;
+        /* Dark overlay behind letter */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+
+        /* Close button */
+        .close-letter {
+            position: absolute;
+            top: 5px;           /* Adjusted position */
+            right: 5px;
+            cursor: pointer;
+            font-size: 18px;    /* Smaller close button */
+            color: #8b5e3c;
+        }
+
+        /* Animation for letter appearance */
+        .letter-popup.show {
+            display: block;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translate(-50%, -60%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1.message {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 38px !important;
+            color: #4a3525 !important;
+            margin: 20px 0;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
     </style>
     
@@ -93,35 +170,64 @@
         <!-- ... existing status bar and dynamic island ... -->
         
         <div class="content">
-            <!-- Updated image files with correct extensions -->
-            <img src="IMG_0188.JPG" class="mai-photo" id="photo1">
-            <img src="IMG_1300.JPG" class="mai-photo" id="photo2">
-            <img src="IMG_1562.JPG" class="mai-photo" style="top: 300px; left: 20px;">
-            <img src="IMG_E1631.JPG" class="mai-photo" style="top: 400px; right: 20px;">
-
             <div class="heart-emoji">❤️</div>
             <h1 class="message">Happy Valentine's, Mai!</h1>
             <button class="heart-button" onclick="revealMessage()">💌 Open Your Love Letter</button>
+            
+            <div class="photo-grid">
+                <img src="IMG_0188.JPG" class="mai-photo" id="photo1">
+                <img src="IMG_1300.JPG" class="mai-photo" id="photo2">
+                <img src="IMG_1562.JPG" class="mai-photo">
+                <img src="IMG_E1631.JPG" class="mai-photo">
+            </div>
         </div>
 
-        <!-- ... rest of existing code ... -->
+        <!-- Add these elements for the popup -->
+        <div class="overlay"></div>
+        <div class="letter-popup">
+            <span class="close-letter">×</span>
+            <div class="letter-content">
+                Dear Mai,
+                
+                Roses are red,
+                Violets are blue,
+                With each passing day,
+                I feel closer to you.
+
+                Through rain or shine,
+                Frowns or smiles,
+                Each day with you
+                Makes it worth while.
+
+                I'll never take it for granted
+                That you are mine.
+                So today I ask,
+                Will you be my Valentine?
+            </div>
+            <div class="letter-signature">
+                Only Yours,
+                Anh
+            </div>
+        </div>
     </div>
 
     <script>
         function revealMessage() {
-            // Modified message for Mai
-            const message = document.createElement('div');
-            message.className = 'message';
-            message.innerHTML = 'Mai, you make every day special! 🌹❤️';
-            message.style.animation = 'fadeIn 1s';
-            document.querySelector('.content').appendChild(message);
-            
-            // Add more hearts for Mai
-            for(let i = 0; i < 100; i++) {
-                createHeart();
-            }
+            // Show the overlay and letter popup
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.letter-popup').classList.add('show');
         }
-        /* ... rest of existing script ... */
+
+        // Close letter when clicking X or overlay
+        document.querySelector('.close-letter').onclick = function() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.letter-popup').classList.remove('show');
+        }
+
+        document.querySelector('.overlay').onclick = function() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.letter-popup').classList.remove('show');
+        }
     </script>
 </body>
 </html>
