@@ -32,6 +32,8 @@
             text-align: center;
             color: white;
             position: relative;
+            height: 100%;
+            z-index: 2;
         }
 
         .message {
@@ -86,7 +88,7 @@
             transform: translate(-50%, -50%);
             width: 85%;
             max-width: 330px;  /* Adjusted for iPhone 14 width */
-            background: linear-gradient(45deg, #fff9f9, #fff);  /* Subtle gradient */
+            background: #f9e7c3;  /* Keep cream background */
             border: none;
             border-radius: 3px;  /* Sharper corners like paper */
             padding: 25px 20px;
@@ -198,6 +200,9 @@
             position: absolute;
             left: 48%;  /* Changed from 42% to 48% to shift right */
             transform: translateX(-50%);
+            margin-bottom: 220px;  /* Increased margin for larger tulips */
+            position: relative;
+            z-index: 3;
         }
 
         .mai-photo {
@@ -209,6 +214,22 @@
             background: white;
             border: 2px solid rgba(147,112,219,0.3);
             box-shadow: 0 4px 15px rgba(147,112,219,0.1);
+        }
+
+        /* Update tulip decoration size and opacity */
+        .tulip-decoration {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 390px;
+            height: 200px;  /* Increased height */
+            background-image: url('pngegg.png');
+            background-size: contain;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            opacity: 0.7;  /* Increased opacity to make it darker */
+            pointer-events: none;
+            z-index: 1;
         }
     </style>
     
@@ -258,6 +279,9 @@
                 Anh
             </div>
         </div>
+
+        <!-- Add these just before closing the ios-screen div, but after the letter-popup div -->
+        <div class="tulip-decoration"></div>
     </div>
 
     <script>
