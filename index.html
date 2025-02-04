@@ -34,7 +34,7 @@
         }
 
         /* Add these new styles for images */
-        .mai-photo {
+        .mai-photo { 
             width: 150px;
             height: 150px;
             border-radius: 20px;
@@ -44,13 +44,13 @@
         }
 
         #photo1 {
-            top: 120px;
+            top: 320px;
             left: 30px;
             transform: rotate(-5deg);
         }
 
         #photo2 {
-            top: 120px;
+            top: 320px;
             right: 30px;
             transform: rotate(-85deg);
         }
@@ -65,7 +65,28 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* Update the other two photos' positioning */
+        .content img:nth-child(3) {
+            top: 500px;
+            left: 20px;
+        }
+
+        .content img:nth-child(4) {
+            top: 500px;
+            right: 20px;
+        }
+
+        /* Add some margin to the top content */
+        .heart-emoji {
+            margin-top: -50px;
+        }
+
+        .message {
+            margin-bottom: 30px;
+        }
     </style>
+    
 </head>
 <body>
     <div class="ios-screen">
