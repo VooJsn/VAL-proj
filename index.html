@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Happy Valentine's Mai ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -18,12 +19,12 @@
         }
 
         .ios-screen {
-            width: 390px;
-            height: 844px;
+            width: 390px;  /* iPhone 14 width */
+            height: 844px; /* iPhone 14 height */
+            background: #ECD3FF;  /* New background color */
             position: relative;
             overflow: hidden;
-            margin: 0 auto;  /* Center on larger screens */
-            background: #ffE4E1;  /* Light pink background */
+            margin: 0 auto;
         }
 
         .content {
@@ -33,40 +34,11 @@
             position: relative;
         }
 
-        /* Create a grid container for photos */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 140px);  /* Slightly smaller photos */
-            grid-gap: 15px;
-            justify-content: center;
-            margin-top: 80px;
-        }
-
-        .mai-photo {
-            width: 140px;
-            height: 140px;
-            border-radius: 15px;
-            border: 3px solid white;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            position: relative;  /* Changed from absolute */
-            transform: rotate(0deg);  /* No rotation */
-        }
-
-        /* Remove all individual positioning */
-        #photo1, #photo2, 
-        .content img:nth-child(3), 
-        .content img:nth-child(4) {
-            top: auto;
-            left: auto;
-            right: auto;
-        }
-
         .message {
-            font-size: 32px;  /* Slightly smaller title */
+            font-family: 'Great Vibes', cursive;
+            font-size: 45px;  /* Adjusted for cursive font */
+            color: #4A3B52;
             margin: 30px 0;
-            font-family: 'Cormorant Garamond', serif;
-            color: #4a3525;
         }
 
         .heart-button {
@@ -207,6 +179,36 @@
             position: relative;
             overflow: hidden;
             height: 100vh;
+        }
+
+        /* Rotate top right image */
+        .photo-grid img:nth-child(2) {
+            transform: rotate(-90deg);
+        }
+
+        /* Keep existing grid and photo styles */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 140px);
+            grid-gap: 20px 40px;
+            justify-content: center;
+            margin: 80px auto 0;
+            padding: 0;
+            width: fit-content;
+            position: absolute;
+            left: 48%;  /* Changed from 42% to 48% to shift right */
+            transform: translateX(-50%);
+        }
+
+        .mai-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 15px;
+            position: relative;
+            padding: 8px;
+            background: white;
+            border: 2px solid rgba(147,112,219,0.3);
+            box-shadow: 0 4px 15px rgba(147,112,219,0.1);
         }
     </style>
     
