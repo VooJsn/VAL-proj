@@ -20,11 +20,10 @@
         .ios-screen {
             width: 390px;
             height: 844px;
-            background: linear-gradient(150deg, #ffe6eb 0%, #ffb6c1 100%);  /* Softer pink gradient */
-            border-radius: 40px;
-            overflow: hidden;
             position: relative;
-            box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);  /* Light pink shadow */
+            overflow: hidden;
+            margin: 0 auto;  /* Center on larger screens */
+            background: #ffE4E1;  /* Light pink background */
         }
 
         .content {
@@ -37,17 +36,16 @@
         /* Create a grid container for photos */
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(2, 150px);  /* 2 columns */
-            grid-gap: 20px;  /* Space between photos */
+            grid-template-columns: repeat(2, 140px);  /* Slightly smaller photos */
+            grid-gap: 15px;
             justify-content: center;
-            margin-top: 100px;  /* Changed from 300px to 100px to move up */
-            position: relative;
+            margin-top: 80px;
         }
 
-        .mai-photo { 
-            width: 150px;
-            height: 150px;
-            border-radius: 20px;
+        .mai-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 15px;
             border: 3px solid white;
             object-fit: cover;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -64,13 +62,36 @@
             right: auto;
         }
 
-        .heart-emoji {
-            margin-top: 20px;
-            font-size: 40px;
+        .message {
+            font-size: 32px;  /* Slightly smaller title */
+            margin: 30px 0;
+            font-family: 'Cormorant Garamond', serif;
+            color: #4a3525;
         }
 
         .heart-button {
-            margin-bottom: 20px;  /* Keep some space between button and photos */
+            background: white;
+            border: none;
+            padding: 10px 20px;  /* Slightly smaller button */
+            border-radius: 25px;
+            font-size: 15px;
+            color: #ff6b95;  /* Soft pink color */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;  /* Space between emoji and text */
+        }
+
+        .heart-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,149,0.2);
+            background: #fff5f7;  /* Slightly pink on hover */
+        }
+
+        .heart-button:active {
+            transform: translateY(0px);
         }
 
         .sticker {
@@ -91,76 +112,101 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70%;          /* Reduced from 80% */
-            max-width: 300px;    /* Reduced from 350px */
-            background: #f9e7c3;
-            border: 6px solid #8b5e3c;  /* Slightly thinner border */
-            border-radius: 10px;
-            padding: 15px;       /* Reduced padding */
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 85%;
+            max-width: 330px;  /* Adjusted for iPhone 14 width */
+            background: linear-gradient(45deg, #fff9f9, #fff);  /* Subtle gradient */
+            border: none;
+            border-radius: 3px;  /* Sharper corners like paper */
+            padding: 25px 20px;
+            box-shadow: 
+                0 0 30px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0,0,0,0.05);  /* Paper-like edge */
             z-index: 1000;
-            font-family: 'Courier New', monospace;
+            font-family: 'Cormorant Garamond', serif;
             color: #4a3525;
+            background-image: 
+                linear-gradient(45deg, #fff9f9, #fff),
+                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.02) 20px, rgba(0,0,0,0.02) 21px);  /* Paper texture */
         }
 
         .letter-content {
-            margin: 12px 0;
-            line-height: 1.4;
-            font-size: 14px;     /* Smaller font size */
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 15px;
+            position: relative;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
         }
 
         .letter-signature {
-            margin-top: 15px;
+            margin-top: 20px;
             font-style: italic;
-            font-size: 14px;     /* Smaller font size */
+            text-align: right;
+            font-size: 16px;
+            color: #333;
         }
 
-        /* Dark overlay behind letter */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 999;
-        }
-
-        /* Close button */
         .close-letter {
             position: absolute;
-            top: 5px;           /* Adjusted position */
-            right: 5px;
+            top: 10px;
+            right: 10px;
             cursor: pointer;
-            font-size: 18px;    /* Smaller close button */
-            color: #8b5e3c;
+            font-size: 20px;
+            color: #ccc;
+            transition: color 0.3s ease;
         }
 
-        /* Animation for letter appearance */
+        .close-letter:hover {
+            color: #999;
+        }
+
+        /* Paper fold effect */
+        .letter-popup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+        }
+
+        /* Animation for opening */
         .letter-popup.show {
             display: block;
-            animation: popIn 0.3s ease-out;
+            animation: unfold 0.5s ease-out;
         }
 
-        @keyframes popIn {
-            from {
-                transform: translate(-50%, -60%) scale(0.8);
+        @keyframes unfold {
+            0% {
+                transform: translate(-50%, -50%) scale(0.95);
                 opacity: 0;
             }
-            to {
+            100% {
                 transform: translate(-50%, -50%) scale(1);
                 opacity: 1;
             }
         }
 
-        h1.message {
-            font-family: 'Cormorant Garamond', serif !important;
-            font-size: 38px !important;
-            color: #4a3525 !important;
-            margin: 20px 0;
-            font-weight: 500;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;  /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            backdrop-filter: blur(3px);  /* Optional: adds slight blur */
+        }
+
+        /* Make sure iOS screen doesn't scroll when popup is open */
+        .ios-screen {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
         }
     </style>
     
@@ -170,9 +216,10 @@
         <!-- ... existing status bar and dynamic island ... -->
         
         <div class="content">
-            <div class="heart-emoji">❤️</div>
             <h1 class="message">Happy Valentine's, Mai!</h1>
-            <button class="heart-button" onclick="revealMessage()">💌 Open Your Love Letter</button>
+            <button class="heart-button" onclick="revealMessage()">
+                <span>For Mai Love ~</span> 💌
+            </button>
             
             <div class="photo-grid">
                 <img src="IMG_0188.JPG" class="mai-photo" id="photo1">
@@ -213,21 +260,24 @@
 
     <script>
         function revealMessage() {
-            // Show the overlay and letter popup
-            document.querySelector('.overlay').style.display = 'block';
-            document.querySelector('.letter-popup').classList.add('show');
+            const overlay = document.querySelector('.overlay');
+            const popup = document.querySelector('.letter-popup');
+            document.body.style.overflow = 'hidden';  // Prevent background scrolling
+            overlay.style.display = 'block';
+            popup.classList.add('show');
         }
 
-        // Close letter when clicking X or overlay
-        document.querySelector('.close-letter').onclick = function() {
-            document.querySelector('.overlay').style.display = 'none';
-            document.querySelector('.letter-popup').classList.remove('show');
+        function closeMessage() {
+            const overlay = document.querySelector('.overlay');
+            const popup = document.querySelector('.letter-popup');
+            document.body.style.overflow = 'auto';   // Restore scrolling
+            overlay.style.display = 'none';
+            popup.classList.remove('show');
         }
 
-        document.querySelector('.overlay').onclick = function() {
-            document.querySelector('.overlay').style.display = 'none';
-            document.querySelector('.letter-popup').classList.remove('show');
-        }
+        // Update close handlers
+        document.querySelector('.close-letter').onclick = closeMessage;
+        document.querySelector('.overlay').onclick = closeMessage;
     </script>
 </body>
 </html>
